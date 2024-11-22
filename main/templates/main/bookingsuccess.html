@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+  <div class="booking-container">
+    <span class="book-title-btn"><img src="{% static 'images/sparkling.png' %}" alt=""> Booking Successful <img src="{% static 'images/suitcase.png' %}" alt=""></span>
+    <h6>Here is your ticket</h6>
+    <div class="booking-ticket-suc">
+        <div class="ticket-container">
+            <div class="image-container">
+                <img class="QR-code-image" src="data:image/png;base64,{{ qrcode_image}}" alt="">
+            </div>
+            <div class="text-section">
+                <div class="first-list">
+                    <span class="tab" id="fullname">{{booking.full_name}}</span>
+                    <span class="tab" id="amount">{{booking.amount}}</span>
+                    <span class="tab" id="location">{{booking.location}}</span>
+                </div>
+                <div class="second-list">
+                    <h2 class="user-code">{{booking.booking_code}}</h2>
+                    <p id="phone_number">{{booking.phone_number}}</p>
+                    <p id="luggage_number">{{booking.luggage_number}} luggage items</p>
+                    <p id="booking-time">Booking time: {{booking.booking_time}}</p>
+                </div>
+                <div class="action-section">
+                    <a href="{% url 'download_receipt' booking.booking_code %}" download class="btn btn-download-ticket">Download Booking Ticket</a>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <img src="{% static 'images/info.png' %}" alt="">
+            <p>Dear Customer,
+                Please remember to download and print this ticket. Attach the print to all your luggages , failure to do so might result in inconvience.</p>
+        </div>
+    </div>
+  </div>
+{% endblock content %}
